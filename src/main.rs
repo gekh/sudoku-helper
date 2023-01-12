@@ -66,18 +66,30 @@ impl Args {
 fn main() {
     let args = Args::parse();
 
-    print_explanation_message(&args);
-
-    for s in find(&args) {
-        println!("{:?}", s.parse::<u128>().unwrap());
+    let found_groups = find(&args);
+    if found_groups.len() == 0 {
+        println!(
+            "Sorry, there are no groups by {} for a number {}.",
+            args.size, args.number
+        );
+    } else if found_groups.len() == 1 {
+        print_explanation_message(&args, true);
+        println!("{:?}", found_groups[0].parse::<u128>().unwrap());
+    } else {
+        print_explanation_message(&args, false);
+        for s in found_groups {
+            println!("{:?}", s.parse::<u128>().unwrap());
+        }
     }
 }
 
-fn print_explanation_message(args: &Args) {
-    print!(
-        "These are groups by {} to sum up to {}",
-        args.size, args.number
-    );
+fn print_explanation_message(args: &Args, is_there_only_one: bool) {
+    if is_there_only_one {
+        print!("These is one group");
+    } else {
+        print!("There are groups");
+    }
+    print!(" by {} to sum up to {}", args.size, args.number);
     if args.excluded.len() > 0 {
         print!(", excluding {:?}", args.excluded);
     }
