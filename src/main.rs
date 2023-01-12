@@ -77,9 +77,38 @@ fn main() {
         println!("{:?}", found_groups[0].parse::<u128>().unwrap());
     } else {
         print_explanation_message(&args, false);
+        let mut common = [true; 9];
         for s in found_groups {
+            let mut yes = [false; 9];
+            for c in s.as_bytes() {
+                yes[(c - b'1') as usize] = true;
+            }
+            for (i, &x) in yes.iter().enumerate() {
+                if x == false {
+                    common[i] = false;
+                }
+            }
             println!("{:?}", s.parse::<u128>().unwrap());
         }
+
+        let common_count = common.iter().filter(|&&x| x == true).count();
+        if common_count > 0 {
+            println!();
+
+            if common_count == 1 {
+                print!("There's a number that appear in every group:");
+            } else {
+                print!("There are numbers that appear in every group:");
+            }
+            for (i, &x) in common.iter().enumerate() {
+                if x == true {
+                    print!(" {:?}", i + 1);
+                }
+            }
+            println!();
+        }
+
+        println!();
     }
 }
 
