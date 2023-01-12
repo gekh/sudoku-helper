@@ -7,7 +7,7 @@ Helper to solve hard Sudoku puzzles
 sudoku-helper number size
 ```
 
-So it will find groups of **size** number of 1 to 9 to sum up to **number**
+It will find groups of **size** numbers of 1 to 9 to sum up to **number**.
 
 ```
 sudoku-helper number size --require=1,2 --eclude=4,5
