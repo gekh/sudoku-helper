@@ -14,3 +14,6 @@ sudoku-helper number size --require=1,2 --eclude=4,5
 ```
 
 It will find the same groups, but filter them to have **required** numbers and not having **excluded** ones.
+
+Example of the hard sudoku puzzle:
+https://www.youtube.com/watch?v=b_TdnCGKEAI
